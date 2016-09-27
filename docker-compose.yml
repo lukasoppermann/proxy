@@ -29,7 +29,7 @@ services:
         networks:
             - appnet
         environment:
-            - VIRTUAL_HOST=cms.formandsystem.dev
+            - VIRTUAL_HOST=lukasoppermann.com
             # - ROOT_FOLDER=cms
             # - ROOT_FOLDER=api
     # php
