@@ -1,0 +1,81 @@
+version: '2'
+services:
+    nginx:
+        image: nginx
+        container_name: nginx
+        ports:
+          - "80:80"
+        volumes:
+          - /etc/nginx/conf.d
+        networks:
+            - appnet
+    #nginx gen
+    nginx-gen:
+        image: jwilder/docker-gen:latest
+        container_name: nginx-gen
+        command: -notify-sighup nginx -watch /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+        volumes_from:
+            - nginx
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+            - ./docker-gen/templates/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
+        networks:
+            - appnet
+    # cms
+    cms:
+        image: shippingdocker/nginx:latest
+        volumes:
+            - ../cms:/var/www/html
+        networks:
+            - appnet
+        environment:
+            - VIRTUAL_HOST=cms.formandsystem.dev
+            # - ROOT_FOLDER=cms
+    # cms
+    api:
+        image: shippingdocker/nginx:latest
+        volumes:
+            - ../api:/var/www/html/api
+        networks:
+            - appnet
+        environment:
+            - VIRTUAL_HOST=api.formandsystem.dev
+            # - ROOT_FOLDER=api
+    # php
+    php:
+        image: shippingdocker/php:latest
+        container_name: fs-php
+        volumes:
+            - ../cms:/var/www/html
+            - ../api:/var/www/html/api
+        networks:
+            - appnet
+    # session & cache
+    redis:
+        container_name: fs-redis
+        image: redis:alpine
+        networks:
+            - appnet
+    # mysql db
+    cmsdb:
+        image: mysql:latest
+        container_name: cmsdb
+        ports:
+            - "3366:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: cmsdb
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+        volumes:
+            - data:/var/lib/mysql
+        networks:
+            - appnet
+# used for interal communication within docker
+networks:
+    appnet:
+        driver: "bridge"
+# used to store and persist data
+volumes:
+    data:
+        driver: "local"

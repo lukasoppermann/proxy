@@ -1,0 +1,23 @@
+# don't redirect proxy
+proxy_redirect  off;
+
+upstream cmsapp {
+	least_conn;
+	server fscms_webserver_1;
+#	server fscms_webserver_1 fail_timeout=10s max_fails=1;
+#	server fscms_webserver_2 fail_timeout=10s max_fails=1;
+#	server fscms_webserver_3 fail_timeout=10s max_fails=1;
+}
+
+server {
+    listen 80;
+    location / {
+		proxy_pass http://cmsapp;
+		proxy_next_upstream error timeout invalid_header http_500 http_504;
+		proxy_next_upstream_tries 2;
+#		proxy_set_header Host localhost;
+		proxy_set_header        Host            $host;
+		proxy_set_header        X-Real-IP       $remote_addr;
+		proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
