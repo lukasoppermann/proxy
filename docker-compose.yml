@@ -25,28 +25,19 @@ services:
     cms:
         image: shippingdocker/nginx:latest
         volumes:
-            - ../cms:/var/www/html
+            - ../cms/current:/var/www/html
         networks:
             - appnet
         environment:
             - VIRTUAL_HOST=cms.formandsystem.dev
             # - ROOT_FOLDER=cms
-    # cms
-    # api:
-    #     image: shippingdocker/nginx:latest
-    #     volumes:
-    #         - ../api:/var/www/html/api
-    #     networks:
-    #         - appnet
-    #     environment:
-    #         - VIRTUAL_HOST=api.formandsystem.dev
             # - ROOT_FOLDER=api
     # php
     php:
         image: shippingdocker/php:latest
         container_name: fs-php
         volumes:
-            - ../cms:/var/www/html
+            - ../cms/current:/var/www/html
             # - ../api:/var/www/html/api
         networks:
             - appnet
