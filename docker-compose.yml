@@ -32,14 +32,14 @@ services:
             - VIRTUAL_HOST=cms.formandsystem.dev
             # - ROOT_FOLDER=cms
     # cms
-    api:
-        image: shippingdocker/nginx:latest
-        volumes:
-            - ../api:/var/www/html/api
-        networks:
-            - appnet
-        environment:
-            - VIRTUAL_HOST=api.formandsystem.dev
+    # api:
+    #     image: shippingdocker/nginx:latest
+    #     volumes:
+    #         - ../api:/var/www/html/api
+    #     networks:
+    #         - appnet
+    #     environment:
+    #         - VIRTUAL_HOST=api.formandsystem.dev
             # - ROOT_FOLDER=api
     # php
     php:
@@ -47,7 +47,7 @@ services:
         container_name: fs-php
         volumes:
             - ../cms:/var/www/html
-            - ../api:/var/www/html/api
+            # - ../api:/var/www/html/api
         networks:
             - appnet
     # session & cache
