@@ -31,7 +31,7 @@ services:
             - nginx
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
-            - ./docker-gen/templates/nginx.prod.tmpl:basedata/etc/docker-gen/templates/nginx.tmpl
+            - ./docker-gen/templates/nginx.prod.tmpl:/etc/docker-gen/templates/nginx.tmpl
         networks:
             - appnet
 # used for interal communication within docker
