@@ -30,8 +30,7 @@ services:
             - appnet
         environment:
             - VIRTUAL_HOST=lukasoppermann.com
-            # - ROOT_FOLDER=cms
-            # - ROOT_FOLDER=api
+            #- VIRTUAL_HOST=cms.formandsystem.dev
     # php
     php:
         image: shippingdocker/php:latest
