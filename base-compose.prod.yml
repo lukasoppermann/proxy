@@ -21,7 +21,7 @@ services:
           - "443:443"
         volumes:
           - /etc/nginx/conf.d
-          - ./letsencrypt:/etc/letsencrypt
+          - ../letsencrypt:/etc/letsencrypt
         networks:
             - appnet
     #nginx gen
