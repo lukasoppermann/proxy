@@ -6,11 +6,12 @@ server {
     return 301 https://$host$request_uri;
 }
 
+upstream cms.lukasoppermann.com {
+    least_conn;
+    server docker_cms_1;
+}
+
 server {
-    upstream cms.lukasoppermann.com {
-    	least_conn;
-    	server docker_cms_1;
-    }
 
     listen 443;
     server_name cms.lukasoppermann.com;
