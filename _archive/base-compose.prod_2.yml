@@ -3,7 +3,7 @@
 #
 #
 #
-# LOCAL VERSION
+# PRODUCTION
 #
 #
 #
@@ -13,12 +13,15 @@
 version: '2'
 services:
     nginx:
+        #image: nginx
         build: ./proxy
         container_name: nginx
         ports:
           - "80:80"
+          - "443:443"
         volumes:
           - /etc/nginx/conf.d
+          - ../letsencrypt:/etc/letsencrypt
         networks:
             - appnet
     #nginx gen
@@ -30,7 +33,7 @@ services:
             - nginx
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
-            - ./docker-gen/templates/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
+            - ./docker-gen/templates/nginx.prod.tmpl:/etc/docker-gen/templates/nginx.tmpl
         networks:
             - appnet
 # used for interal communication within docker
