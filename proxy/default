@@ -8,6 +8,8 @@ gzip_types text/plain text/css application/javascript application/json applicati
 include /etc/nginx/proxy.conf;
 # catch all to not allow unwanted domains
 include /etc/nginx/catch.conf;
+# general ssl parameters
+include /etc/nginx/ssl-params.conf;
 
 upstream api.formandsystem.dev {
     least_conn;
@@ -23,13 +25,7 @@ server {
     access_log            /var/log/nginx/api.formandsystem.dev.access.log;
 
     location / {
-
-      proxy_set_header        Host $host;
-      proxy_set_header        X-Real-IP $remote_addr;
-      proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header        X-Forwarded-Proto $scheme;
-
-      proxy_pass              http://api.formandsystem.dev;
+      proxy_pass              http://$host$uri;
     }
 }
 
@@ -44,15 +40,12 @@ server {
     listen 80;
     server_name cms.formandsystem.dev;
 
-    access_log            /var/log/nginx/cms.formandsystem.dev.access.log;
+    access_log            /var/log/nginx/{{ $host }}.access.log;
+
+    ssl_certificate /etc/letsencrypt/live/{{ $host }}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ $host }}/privkey.pe
 
     location / {
-
-      proxy_set_header        Host $host;
-      proxy_set_header        X-Real-IP $remote_addr;
-      proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header        X-Forwarded-Proto $scheme;
-
-      proxy_pass              http://cms.formandsystem.dev;
+      proxy_pass              http://$host$uri;
     }
 }

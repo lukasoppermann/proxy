@@ -21,6 +21,7 @@ services:
           - /etc/nginx/conf.d
           - ./proxy/includes/proxy.conf:/etc/nginx/proxy.conf
           - ./proxy/includes/catch.conf:/etc/nginx/catch.conf
+          - ./proxy/includes/ssl-params.conf:/etc/nginx/ssl-params.conf
         networks:
             - appnet
     #nginx gen
