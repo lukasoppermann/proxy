@@ -1,7 +1,7 @@
 version: '2'
 services:
     api:
-        image: nginx
+        image: shippingdocker/nginx
         volumes:
             - ../../api:/var/www/html
             - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
