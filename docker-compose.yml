@@ -1,15 +1,13 @@
 version: '2'
 services:
     nginx:
-        image: nginx:alpine
+        image: nginx:alpine # using alpine for newer openssl for http2 with ALPAN
         container_name: nginx
         volumes:
             - ./public/:/var/www/html/public
             - ./nginx/includes:/etc/nginx/includes:ro
             - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
             - ./letsencrypt/:/etc/letsencrypt
-            #- ./letsencrypt/:/etc/ssl/certs/
-            #- letsencrypt:/test
         ports:
             - "80:80"
             - "443:443"
