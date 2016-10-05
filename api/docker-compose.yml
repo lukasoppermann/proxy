@@ -4,7 +4,8 @@ services:
         image: shippingdocker/nginx
         volumes:
             - ../../api:/var/www/html
-            - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+            #- ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+            - ./nginx/default:/etc/nginx/sites-enabled/default
         networks:
             - fsdocker_appnet
         depends_on:
