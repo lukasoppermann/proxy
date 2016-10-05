@@ -11,7 +11,7 @@ services:
     apiphp:
         image: shippingdocker/php:latest
         container_name: apiphp
-        volumes_from: [nginx]
+        volumes_from: [api]
         networks:
             - fsdocker_appnet
     # session & cache
