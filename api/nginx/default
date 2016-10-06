@@ -1,3 +1,8 @@
+http {
+	# make nginx follow symlinks
+	disable_symlinks off;
+}
+
 server {
 	listen 443 ssl http2;
 	listen 80;
