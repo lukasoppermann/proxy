@@ -16,7 +16,7 @@ services:
         image: shippingdocker/php:latest
         container_name: api_php
         volumes:
-            - ../../api:/var/www/html
+            - ../../apps/api/current/:/var/www/html/
         networks:
             - fsdocker_appnet
     # session & cache
