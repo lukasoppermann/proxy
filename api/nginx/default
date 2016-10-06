@@ -3,6 +3,8 @@ server {
 	listen 80;
 	server_name  webserver;
 
+	sendfile off;
+
 	# make nginx follow symlinks
 	disable_symlinks off;
 
