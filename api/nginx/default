@@ -8,7 +8,7 @@ server {
 	# make nginx follow symlinks
 	disable_symlinks off;
 
-	root /var/www/html/public;
+	root /var/www/html/current/public;
 
 	# don't show nginx version
 	server_tokens off;
