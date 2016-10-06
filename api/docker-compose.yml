@@ -1,10 +1,12 @@
 version: '2'
 services:
     nginx:
-        image: shippingdocker/nginx
+        # image: shippingdocker/nginx
+        build: ./nginx
         volumes:
             - ../../apps/api/current/:/var/www/html/
             #- ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+            #sendfile off;
             - ./nginx/default:/etc/nginx/sites-enabled/default
         networks:
             - fsdocker_appnet
