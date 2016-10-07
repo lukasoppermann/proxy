@@ -3,8 +3,9 @@ services:
     nginx:
         # image: shippingdocker/nginx
         build: ./nginx
+        volumes_from: [api_php]
         volumes:
-            - ../../apps/api/:/var/www/html/
+            # - ../../apps/api/:/var/www/html/
             - ./nginx/default:/etc/nginx/sites-enabled/default
         networks:
             - fsdocker_appnet
