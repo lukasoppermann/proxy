@@ -18,7 +18,7 @@ RUN apt-get update \
     && mkdir /run/php \
     && apt-get remove -y --purge software-properties-common \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && curl -so /var http://gordalina.github.io/cachetool/downloads/cachetool.phar
 
 ADD php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
