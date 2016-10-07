@@ -1,5 +1,7 @@
 FROM ubuntu:16.04
 
+ENV TERM xterm
+
 RUN apt-get update \
     && apt-get install -y nginx \
     nano \
@@ -9,8 +11,6 @@ RUN apt-get update \
 
 # ADD nginx.conf /etc/nginx/nginx.conf
 ADD default /etc/nginx/sites-available/default
-
-ENV TERM xterm
 
 EXPOSE 80
 CMD ["nginx"]

@@ -5,6 +5,7 @@ RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
+ENV TERM xterm
 
 RUN apt-get update \
 
@@ -23,8 +24,6 @@ RUN apt-get update \
 
 ADD php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
 ADD www.conf /etc/php/7.0/fpm/pool.d/www.conf
-
-ENV TERM xterm
 
 EXPOSE 9000
 CMD ["php-fpm7.0"]
