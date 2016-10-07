@@ -13,7 +13,8 @@ services:
             - api_redis
     # php
     api_php:
-        image: shippingdocker/php:latest
+        # image: shippingdocker/php:latest
+        build: ./php
         container_name: api_php
         volumes:
             - ../../apps/api/:/var/www/html/
