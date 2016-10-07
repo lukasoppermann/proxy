@@ -1,7 +1,8 @@
 version: '2'
 services:
     nginx:
-        image: shippingdocker/nginx
+        # image: shippingdocker/nginx
+        build: ./nginx
         volumes:
             - ../../apps/api/:/var/www/html/
             - ./nginx/default:/etc/nginx/sites-enabled/default
