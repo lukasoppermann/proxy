@@ -24,5 +24,7 @@ RUN apt-get update \
 ADD php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
 ADD www.conf /etc/php/7.0/fpm/pool.d/www.conf
 
+ENV TERM xterm
+
 EXPOSE 9000
 CMD ["php-fpm7.0"]

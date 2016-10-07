@@ -10,5 +10,7 @@ RUN apt-get update \
 # ADD nginx.conf /etc/nginx/nginx.conf
 ADD default /etc/nginx/sites-available/default
 
+ENV TERM xterm
+
 EXPOSE 80
 CMD ["nginx"]
