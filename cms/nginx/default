@@ -28,6 +28,7 @@ server {
 
 	location ~ \.php$ {
 		include snippets/fastcgi-php.conf;
+		fastcgi_param HTTPS           $https if_not_empty;
 		fastcgi_pass cms_php:9000;
 	}
 
