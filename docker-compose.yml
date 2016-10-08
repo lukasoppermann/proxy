@@ -5,7 +5,7 @@ services:
         container_name: nginx
         volumes:
             - /var/www/html
-            - ./logs/nginx/api.lukasoppermann.com/:/var/log/nginx/api.lukasoppermann.com:rw
+            - ./logs/nginx/:/var/log/nginx:rw
             - ./nginx/includes:/etc/nginx/includes:ro
             - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
             - ../letsencrypt/:/etc/letsencrypt
