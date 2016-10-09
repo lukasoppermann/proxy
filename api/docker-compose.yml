@@ -34,11 +34,6 @@ services:
         ports:
             - "3301:3306"
         command: mysqld --performance_schema=0
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: apidb
-            MYSQL_USER: root
-            MYSQL_PASSWORD: root
         volumes:
             - apidata:/var/lib/mysql
         networks:

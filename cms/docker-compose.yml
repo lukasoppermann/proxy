@@ -32,11 +32,6 @@ services:
         ports:
             - "3302:3306"
         command: mysqld --performance_schema=0
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: formandsystem_cms
-            MYSQL_USER: root
-            MYSQL_PASSWORD: root
         volumes:
             - cmsdata:/var/lib/mysql
         networks:
