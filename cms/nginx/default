@@ -9,9 +9,6 @@ server {
 	disable_symlinks off;
 
 	root /var/www/html/latest/public;
-	
-	# globally enable gzip
-	gzip_types text/plain text/css application/javascript application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
 
 	# don't show nginx version
 	server_tokens off;
