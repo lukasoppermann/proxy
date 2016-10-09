@@ -8,6 +8,11 @@ server {
 	# make nginx follow symlinks
 	disable_symlinks off;
 
+	# set expire header for static files
+	location ~* .(svg|jpg|jpeg|png|gif|ico|css|js)$ {
+	    expires 365d;
+	}
+
 	root /var/www/html/latest/public;
 
 	# don't show nginx version
