@@ -32,6 +32,8 @@ services:
         ports:
             - "3302:3306"
         command: mysqld --performance_schema=0
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: yes
         volumes:
             - cmsdata:/var/lib/mysql
         networks:
