@@ -3,6 +3,7 @@
 ### Includes
 - nginx proxy
 - letsencrypt volumne
+- letsencrypt add domain script
 - letsencrypt cronjob
 
 ### Adding domains
