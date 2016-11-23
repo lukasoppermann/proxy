@@ -21,7 +21,5 @@ networks:
         driver: "bridge"
 # used to store and persist data
 volumes:
-    basedata:
-        driver: "local"
     letsencrypt:
         driver: "local"
