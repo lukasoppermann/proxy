@@ -5,6 +5,4 @@ docker run -it --rm --name letsencrypt \
   --volumes-from nginx \
   quay.io/letsencrypt/letsencrypt \
   renew \
-  --text \
-  --staging \
-  --dry-run
+  --text
