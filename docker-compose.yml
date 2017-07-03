@@ -5,7 +5,7 @@ services:
         container_name: nginx
         volumes:
             - ../letsencrypt/:/etc/letsencrypt
-            - /var/www/html
+            - ./nginx/var/www/html:/var/www/html
             - ./logs/nginx/:/var/log/nginx:rw
             - ./nginx/includes:/etc/nginx/includes:ro
             - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf

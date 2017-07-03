@@ -5,4 +5,5 @@ output=$(docker run -it --rm --name letsencrypt \
   --volumes-from nginx \
   quay.io/letsencrypt/letsencrypt \
   renew \
+  --dry-run \
   --text 2>&1) && echo "$output" | mail -s 'Revalidating ssls for domains' oppermann.lukas@gmail.com
