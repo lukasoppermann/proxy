@@ -3,7 +3,7 @@
 output=$(docker run -it --rm --name letsencrypt \
   -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
   --volumes-from nginx \
-  quay.io/letsencrypt/letsencrypt \
+  certbot/certbot \
   renew \
   --dry-run \
   --text 2>&1) && echo "$output" | mail -s 'Revalidating ssls for domains' oppermann.lukas@gmail.com

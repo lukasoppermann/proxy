@@ -3,13 +3,14 @@
 # send expiration via email without color codes
 # sh expiration_dates | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g" | sed "s/\x0f//g" > output ; mail -s "SSL Certificate expiration dates" "oppermann.lukas@gmail.com" < output
 
+live_dir=/home/letsencrypt/live/
 
 echo "############"
 echo " "
-for d in $(find /home/letsencrypt/live/*/ -maxdepth 1 -type d);
+for d in $(find $live_dir*/ -maxdepth 1 -type d);
 do
   cert="${d}cert.pem"
-  site=${d##/home/letsencrypt/live/}
+  site=${d##$live_dir}
   if openssl x509 -checkend 86400 -noout -in $cert
   then
     echo "\033[1;92m✔︎\033[0m The certificate $site is good for at least another day!"
