@@ -74,3 +74,8 @@ networks:
     docker_appnet:
         external: true
 ```
+
+### Clone
+```
+git clone -b letsencrypt --single-branch --depth=1 https://github.com/lukasoppermann/docker
+```
