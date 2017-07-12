@@ -1,0 +1,29 @@
+#!/bin/sh
+# SETUP
+# This script is based on the assumption that mailutils is installed
+# apt-get update
+# apt-get install mailutils
+log_dir=../logs/nginx/letsencrypt/
+
+output=$(docker run -it --rm --name letsencrypt \
+  -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
+  --volumes-from nginx \
+  certbot/certbot \
+  renew \
+  --dry-run \
+  --text 2>&1)
+# Get Date
+date=`date +%Y-%m-%d_%H%M%S`
+# create log folder if it does not exist
+mkdir -p $log_dir
+# Write output to log file
+cat > ${log_dir}${date}_letsencrypt.txt << EOF
+Date: $date
+$output
+EOF
+# send email if mail command is available
+if type "mail" &> /dev/null; then
+  echo "$output" | mail -s "Daily SSL Revalidation update from ${date}" -A ${log_dir}${date}_letsencrypt.txt -r server@vea.re oppermann.lukas@gmail.com
+fi
+# remove log files older than 40 days
+find $log_dir -type f -mtime +40 -delete

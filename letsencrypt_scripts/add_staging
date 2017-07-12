@@ -5,7 +5,7 @@
 docker run -it --rm --name letsencrypt \
   -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
   --volumes-from nginx \
-  quay.io/letsencrypt/letsencrypt \
+  certbot/certbot \
   certonly \
   --webroot \
   --webroot-path /var/www/html \

@@ -74,3 +74,16 @@ networks:
     docker_appnet:
         external: true
 ```
+
+### Installation
+```
+git clone -b letsencrypt --single-branch --depth=1 https://github.com/lukasoppermann/docker
+```
+
+
+Once on the server you need to add the `dhparam`:
+
+```
+cd ~/letsencrypt
+sudo openssl dhparam -out dhparam.pem 2048
+```
