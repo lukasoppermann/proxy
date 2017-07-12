@@ -12,8 +12,10 @@ output=$(docker run -it --rm --name letsencrypt \
   renew \
   --dry-run \
   --text 2>&1)
-
+# Get Date
 date=`date +%Y-%m-%d_%H%M%S`
+# create log folder if it does not exist
+mkdir -p $log_dir
 # Write output to log file
 cat > ${log_dir}${date}_letsencrypt.txt << EOF
 Date: $date
@@ -21,7 +23,7 @@ $output
 EOF
 # send email if mail command is available
 if type "mail" &> /dev/null; then
-  echo "$output" | mail -s "Daily SSL Revalidation update from ${date}" -A ${log_dir}${date}_letsencrypt -r server@vea.re oppermann.lukas@gmail.com
+  echo "$output" | mail -s "Daily SSL Revalidation update from ${date}" -A ${log_dir}${date}_letsencrypt.txt -r server@vea.re oppermann.lukas@gmail.com
 fi
 # remove log files older than 40 days
 find $log_dir -type f -mtime +40 -delete
