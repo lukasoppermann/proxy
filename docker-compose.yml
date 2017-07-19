@@ -21,8 +21,8 @@ networks:
     appnet:
         driver: "bridge"
 # used to store and persist data
-volumes:
-    letsencrypt:
-        driver: "local"
-    apps:
-         driver: "local"
+# volumes:
+#     letsencrypt:
+#         driver: "local"
+#     apps:
+#          driver: "local"

@@ -5,12 +5,11 @@
 # apt-get install mailutils
 log_dir=../logs/nginx/letsencrypt/
 
-output=$(docker run -it --rm --name letsencrypt \
-  -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
+output=$(docker run -it --rm \
+  #--name letsencrypt \
+  #-v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
   --volumes-from nginx \
-  certbot/certbot \
-  renew \
-  --dry-run \
+  certbot/certbot renew \
   --text 2>&1)
 # Get Date
 date=`date +%Y-%m-%d_%H%M%S`

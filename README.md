@@ -77,7 +77,7 @@ networks:
 
 ### Installation
 ```
-git clone -b letsencrypt --single-branch --depth=1 https://github.com/lukasoppermann/docker
+git clone -b letsencrypt --single-branch --depth=1 https://github.com/lukasoppermann/proxy
 ```
 
 
