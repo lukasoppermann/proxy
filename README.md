@@ -76,14 +76,13 @@ networks:
 ```
 
 ### Installation
+1. Clone the repositiory into your home/webroot directory.
 ```
-git clone -b letsencrypt --single-branch --depth=1 https://github.com/lukasoppermann/proxy
+sudo git clone -b master --single-branch --depth=1 https://github.com/lukasoppermann/proxy
 ```
-
-
-Once on the server you need to add the `dhparam`:
-
-```
-cd ~/letsencrypt
+2. Run `docker-compose up -d` from within the new `proxy` directory
+3. Create the `dhparam.pem` in the now newly created `letsencrypt` directory
+```bash
+/home/proxy$ cd ../letsencrypt
 sudo openssl dhparam -out dhparam.pem 2048
 ```
