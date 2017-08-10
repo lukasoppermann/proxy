@@ -5,7 +5,7 @@
 # apt-get install mailutils
 log_dir=../logs/nginx/letsencrypt/
 
-output=$(docker run -it --rm \
+output=$(docker run --rm \
   --volumes-from nginx \
   certbot/certbot renew \
   --text 2>&1)
