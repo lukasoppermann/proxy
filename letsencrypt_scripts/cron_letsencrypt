@@ -6,8 +6,6 @@
 log_dir=../logs/nginx/letsencrypt/
 
 output=$(docker run -it --rm \
-  #--name letsencrypt \
-  #-v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
   --volumes-from nginx \
   certbot/certbot renew \
   --text 2>&1)
@@ -20,9 +18,11 @@ cat > ${log_dir}${date}_letsencrypt.txt << EOF
 Date: $date
 $output
 EOF
-# send email if mail command is available
-if type "mail" &> /dev/null; then
-  echo "$output" | mail -s "Daily SSL Revalidation update from ${date}" -A ${log_dir}${date}_letsencrypt.txt -r server@vea.re oppermann.lukas@gmail.com
-fi
+# echo outout
+echo $output
 # remove log files older than 40 days
 find $log_dir -type f -mtime +40 -delete
+# send email if mail command is available
+if type "mail" > /dev/null 2>&1; then
+  echo "$output" | mail -s "Daily SSL Revalidation update from ${date}" -A ${log_dir}${date}_letsencrypt.txt -r server@vea.re oppermann.lukas@gmail.com
+fi

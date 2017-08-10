@@ -81,8 +81,22 @@ networks:
 sudo git clone -b master --single-branch --depth=1 https://github.com/lukasoppermann/proxy
 ```
 2. Run `docker-compose up -d` from within the new `proxy` directory
-3. Create the `dhparam.pem` in the now newly created `letsencrypt` directory
+3. Set permissions of `/home/sites` & `/home/letsencrypt` to deploy user
+```
+sudo chown deploy:docker sites
+sudo chown deploy:docker letsencrypt
+```
+4. (SKIP if you copy old certificates with `dhparam.pem`) Create the `dhparam.pem` in the now newly created `letsencrypt` directory
 ```bash
-/home/proxy$ cd ../letsencrypt
+# from within /home/proxy
+cd ../letsencrypt
 sudo openssl dhparam -out dhparam.pem 2048
 ```
+5. Add or copy certificates onto server
+```bash
+# copy certificates FROM Server TO local
+scp -r deploy@46.101.143.234:/home/letsencrypt ./letsencrypt
+# copy files & folders within letsencrypt_backup FROM local TO Server
+scp -r ./letsencrypt_backup/* deploy@46.101.143.234:/home/letsencrypt
+```
+6. Start nginx within project folder for node server

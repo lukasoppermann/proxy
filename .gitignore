@@ -4,3 +4,4 @@
 _*
 /logs/nginx/letsencrypt
 /logs/nginx/*.log
+/letsencrypt_backup
