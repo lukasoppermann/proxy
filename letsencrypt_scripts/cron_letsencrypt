@@ -26,3 +26,5 @@ find $log_dir -type f -mtime +40 -delete
 if type "mail" > /dev/null 2>&1; then
   echo "$output" | mail -s "Daily SSL Revalidation update from ${date}" -A ${log_dir}${date}_letsencrypt.txt -r server@vea.re oppermann.lukas@gmail.com
 fi
+# refresh nginx
+docker exec -it nginx nginx -s reload
