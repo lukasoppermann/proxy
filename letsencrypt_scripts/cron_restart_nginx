@@ -1,0 +1,8 @@
+#!/bin/sh
+# SETUP
+# This script is based on the assumption that mailutils is installed
+# apt-get update
+# apt-get install mailutils
+log_dir=../logs/nginx/letsencrypt/
+# refresh nginx
+docker exec -it nginx nginx -s reload
