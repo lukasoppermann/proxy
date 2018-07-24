@@ -9,6 +9,8 @@ output=$(docker run --rm \
   --volumes-from nginx \
   certbot/certbot renew \
   --text 2>&1)
+  # refresh nginx
+nginx=$(docker exec -it nginx nginx -s reload && docker exec -it nginx nginx -v)
 # Get Date
 date=`date +%Y-%m-%d_%H%M%S`
 # create log folder if it does not exist
@@ -17,6 +19,7 @@ mkdir -p $log_dir
 cat > ${log_dir}${date}_letsencrypt.txt << EOF
 Date: $date
 $output
+$nginx
 EOF
 # echo outout
 echo $output
@@ -24,7 +27,7 @@ echo $output
 find $log_dir -type f -mtime +40 -delete
 # send email if mail command is available
 if type "mail" > /dev/null 2>&1; then
-  echo "$output" | mail -s "Daily SSL Revalidation update from ${date}" -A ${log_dir}${date}_letsencrypt.txt -r server@vea.re oppermann.lukas@gmail.com
+  echo "$output & $nginx" | mail -s "Daily SSL Revalidation update from ${date}" -A ${log_dir}${date}_letsencrypt.txt -r server@vea.re oppermann.lukas@gmail.com
 fi
 # refresh nginx
 docker exec -it nginx nginx -s reload
