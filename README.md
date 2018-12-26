@@ -100,3 +100,19 @@ scp -r deploy@46.101.143.234:/home/letsencrypt ./letsencrypt
 scp -r ./letsencrypt_backup/* deploy@46.101.143.234:/home/letsencrypt
 ```
 6. Start nginx within project folder for node server
+
+### Cronjob to run renewal
+Add the following scripts to be executed by the users `crontab`.
+
+First set the right `chmod` and `chown`.
+```bash
+sudo chown root cron_letsencrypt && sudo chown root restart_nginx
+sudo chmod 755 cron_letsencrypt && sudo chmod 755 restart_nginx
+```
+
+Afterwards add them to the crontab with `crontab -e` to edit.
+
+```bash
+30 18 * * *  /home/proxy/letsencrypt_scripts/cron_letsencrypt >> /home/proxy/logs/cron.log 2>&1
+35 18 * * * /home/proxy/letsencrypt_scripts/restart_nginx >> /home/proxy/logs/cron.log 2>&1
+```
